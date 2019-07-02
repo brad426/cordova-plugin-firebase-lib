@@ -74,12 +74,12 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
 
         // Pass the message to the receiver manager so any registered receivers can decide to handle it
         boolean wasHandled = FirebasePluginMessageReceiverManager.onMessageReceived(remoteMessage);
-        if (wasHandled) {
+        /*if (wasHandled) {
             Log.d(TAG, "Message was handled by a registered receiver");
 
             // Don't process the message in this method.
             return;
-        }
+        }*/
 
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
@@ -121,7 +121,8 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
 
         // TODO: Add option to developer to configure if show notification when app on foreground
         if (!TextUtils.isEmpty(text) || !TextUtils.isEmpty(title) || (data != null && !data.isEmpty())) {
-            boolean showNotification = (FirebasePlugin.inBackground() || !FirebasePlugin.hasNotificationsCallback()) && (!TextUtils.isEmpty(text) || !TextUtils.isEmpty(title));
+            boolean showNotification = (/*FirebasePlugin.inBackground() || */!FirebasePlugin.hasNotificationsCallback()) && (!TextUtils.isEmpty(text) || !TextUtils.isEmpty(title));
+            Log.d(TAG, "showNotification: " + showNotification);
             sendNotification(id, title, text, data, showNotification, sound, lights);
         }
     }
